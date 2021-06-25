@@ -1,0 +1,10 @@
+version: '3'
+services:
+  erp-produto:
+    image: dehemart/erp-produto:latest
+    container_name: erp-produto
+    ports:
+      - 8080:8081
+    environment:
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_CLOUD_CONFIG_URI: optional:configserver:http://localhost:8888
