@@ -12,7 +12,13 @@ $ docker-compose up -d
 ### Environment
 
 Setting environment's variables:  
-```jshell
+```shell
 SPRING_PROFILES_ACTIVE = local|dev|stg|prd 
 SPRING_CLOUD_CONFIG_URI = http://localhost:8888
+```
+
+## Deploy Docker image
+Setting version in pom.xml and:
+```shell
+$ mvn clean install
 ```
