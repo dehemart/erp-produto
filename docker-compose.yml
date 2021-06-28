@@ -7,5 +7,5 @@ services:
       - 8810:8810
     environment:
       PORT: 8810
-      SPRING_PROFILES_ACTIVE: local
-      SPRING_CLOUD_CONFIG_URI: http://172.17.0.1:8888
+      PROFILE: local
+      CONFIG_SERVER_URI: http://172.17.0.1:8888

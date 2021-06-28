@@ -4,4 +4,4 @@ spring:
   profiles:
     active: ${PROFILE:local}
   config:
-    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8888/}
+    import: optional:configserver:${CONFIG_SERVER_URI:http://172.17.0.1:8888/}
