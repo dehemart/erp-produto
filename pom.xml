@@ -10,7 +10,7 @@
     </parent>
     <groupId>dehemart</groupId>
     <artifactId>erp-produto</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <name>erp-produto</name>
     <description>Demo project for Spring Boot</description>
     <properties>
