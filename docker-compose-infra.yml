@@ -1,8 +1,8 @@
 version: '3.4'
 services:
-  config-server:
+  erp-config:
     image: dehemart/erp-config-server:latest
-    container_name: erp-config-server
+    container_name: erp-config
     ports:
       - 8888:8888
     environment:
@@ -28,11 +28,13 @@ services:
       PORT: 8080
       SPRING_PROFILES_ACTIVE: local
       SPRING_CLOUD_CONFIG_URI: http://192.168.1.169:8888/
+    depends_on:
+      - config-server
+      - erp-discovery
 
-  postgres:
+  erp-postgres:
     image: postgres
     container_name: erp-db
-    restart: always
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -43,7 +45,7 @@ services:
         max-size: 10m
         max-file: "3"
     ports:
-      - '5432:5432'
+      - 5432:5432
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
       - ./scripts:/docker-entrypoint-initdb.d
