@@ -1,0 +1,49 @@
+version: '3.4'
+services:
+  config-server:
+    image: dehemart/erp-config-server:latest
+    container_name: erp-config-server
+    ports:
+      - 8888:8888
+    environment:
+      PORT: 8888
+      PROPERTIES_URI: "https://github.com/dehemart/erp-properties"
+
+  erp-discovery:
+    image: dehemart/erp-discovery:latest
+    container_name: erp-discovery
+    ports:
+      - 8761:8761
+    environment:
+      PORT: 8761
+      LOG_EUREKA_TURN: "OFF"
+      LOG_DISCOVERY_TURN: "OFF"
+
+  erp-gateway:
+    image: dehemart/erp-gateway:latest
+    container_name: erp-gateway
+    ports:
+      - 8080:8080
+    environment:
+      PORT: 8080
+      SPRING_PROFILES_ACTIVE: local
+      SPRING_CLOUD_CONFIG_URI: http://192.168.1.169:8888/
+
+  postgres:
+    image: postgres
+    container_name: erp-db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+      - ./scripts:/docker-entrypoint-initdb.d
