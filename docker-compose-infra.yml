@@ -29,12 +29,12 @@ services:
       SPRING_PROFILES_ACTIVE: local
       SPRING_CLOUD_CONFIG_URI: http://192.168.1.169:8888/
     depends_on:
-      - config-server
+      - erp-config
       - erp-discovery
 
   erp-postgres:
     image: postgres
-    container_name: erp-db
+    container_name: erp-postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
